@@ -16,6 +16,7 @@ popd
 
 function link_model() {
     ln -s ${ROVER_PROJECT_ROOT}/models/$1 ~/.gazebo/models/$1
+    ln -s ${ROVER_PROJECT_ROOT}/models/$1 /opt/rover/$1
 }
 
 function check_rover() {
@@ -23,5 +24,16 @@ function check_rover() {
 }
 
 function run_sim() {
-    NO_AT_BRIDGE=1 roslaunch brain "${1:-gazebo.launch}" model:="${2:-~/.gazebo/models/rover/model.urdf}"
+    NO_AT_BRIDGE=1 roslaunch brain "${1:-gazebo.launch}" model:="${2:-/opt/rover/rover/model.urdf}"
+}
+
+function rover_stop() {
+    rostopic pub /rover/cmd_vel geometry_msgs/Twist "linear:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.0"
 }

@@ -2,7 +2,7 @@
 <robot name='rover'>
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace>/</robotNamespace>
+      <robotNamespace>/rover</robotNamespace>
     </plugin>
   </gazebo>
 
@@ -379,6 +379,27 @@
   </joint>
 
   <gazebo>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <alwaysOn>false</alwaysOn>
+      <legacyMode>false</legacyMode>
+      <updateRate>20</updateRate>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+
+      <robotNamespace>/rover</robotNamespace>
+      <!-- Very dumb rover steering config-->
+      <robotBaseFrame>chassis</robotBaseFrame>
+      <leftFrontJoint>wheel_6_joint</leftFrontJoint>
+      <rightFrontJoint>wheel_1_joint</rightFrontJoint>
+      <leftRearJoint>wheel_4_joint</leftRearJoint>
+      <rightRearJoint>wheel_3_joint</rightRearJoint>
+      <wheelDiameter>0.256</wheelDiameter>
+      <!-- TODO: accurate values for separation, wheelTorque -->
+      <wheelSeparation>0.5</wheelSeparation>
+      <wheelTorque>20</wheelTorque>
+    </plugin>
+
     <link name='right_diff_rail'>
       <inertial>
         <mass>0.000236124</mass>
