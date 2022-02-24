@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Catkin build",
+        "type": "shell",
+        "command": "make catkin_build",
+        "group": "build",
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared",
+          "clear": true
+        }
+      },
+      {
+        "label": "Lazygit",
+        "type": "shell",
+        "command": "git add . && git commit -m \"${input:commitName}\" && git push",
+        "group": "build",
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared",
+          "clear": true
+        }
+      },
+    ],
+
+    "inputs": [
+      {
+        "id": "commitName",
+        "type": "promptString",
+        "description": "Commit name"
+      }
+  ]
+}
