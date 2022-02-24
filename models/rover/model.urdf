@@ -204,7 +204,7 @@
   <joint name='wheel_1_joint' type='continuous'>
     <parent link="right_handle"/>
     <child link="wheel_1"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <origin xyz="0.264321 -0.213856  0.132" rpy="0 0 0"/>
   </joint>
 
@@ -272,7 +272,7 @@
   <joint name='wheel_2_joint' type='continuous'>
     <parent link="right_boggie"/>
     <child link="wheel_2"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <origin xyz="0.167 -0.14  0.138" rpy="0 0 0"/>
   </joint>
 
@@ -340,7 +340,7 @@
   <joint name='wheel_3_joint' type='continuous'>
     <parent link="right_boggie"/>
     <child link="wheel_3"/>
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 0 -1"/>
     <origin xyz="-0.167 -0.14  0.138" rpy="0 0 0"/>
   </joint>
 
@@ -392,12 +392,12 @@
       <robotBaseFrame>chassis</robotBaseFrame>
       <leftFrontJoint>wheel_6_joint</leftFrontJoint>
       <rightFrontJoint>wheel_1_joint</rightFrontJoint>
-      <leftRearJoint>wheel_4_joint</leftRearJoint>
-      <rightRearJoint>wheel_3_joint</rightRearJoint>
+      <leftRearJoint>wheel_5_joint</leftRearJoint>
+      <rightRearJoint>wheel_2_joint</rightRearJoint>
       <wheelDiameter>0.256</wheelDiameter>
-      <!-- TODO: accurate values for separation, wheelTorque -->
+      <!-- TODO: accurate values for separation, torque -->
       <wheelSeparation>0.5</wheelSeparation>
-      <wheelTorque>20</wheelTorque>
+      <torque>5</torque>
     </plugin>
 
     <link name='right_diff_rail'>
