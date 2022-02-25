@@ -1,12 +1,17 @@
 PYTHONPATH = PYTHONPATH=./
 PYTHON = $(PYTHONPATH) python3
 
-.PHONY: run-script install-script-deps help
+.PHONY: setup run-script install-script-deps help
+SHELL = bash
+
+_setup:  # Утилитарная команда для настройки среды билд-тасок
+	source /opt/ros/noetic/setup.bash
+	source setup.sh
 
 run-script:  ## Запустить скрипты
 	${PYTHON} -m scripts
 
-catkin_build:  ## Сбилдить пакет
+catkin_build: _setup  ## Сбилдить пакет
 	catkin_make --source pkg -DCMAKE_BUILD_TYPE=Release --pkg=brain
 
 install-script-deps:  ## Установить зависимости для запуска скриптов локально
