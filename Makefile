@@ -1,18 +1,21 @@
 PYTHONPATH = PYTHONPATH=./
 PYTHON = $(PYTHONPATH) python3
 
-.PHONY: setup run-script install-script-deps help
+_SETUP = set -e ; source /opt/ros/noetic/setup.bash ; source setup.sh ; source scripts/_base.sh
+
+.PHONY: run-script install-script-deps help
 SHELL = bash
 
-_setup:  # Утилитарная команда для настройки среды билд-тасок
-	source /opt/ros/noetic/setup.bash
-	source setup.sh
+BUILD_TYPE = Release
+catkin_build:  ## Сбилдить пакет
+	{ \
+	$(_SETUP) ;\
+	warning "Build type - $(BUILD_TYPE)\n" ;\
+	catkin_make --source pkg -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) --pkg=brain ;\
+	}
 
 run-script:  ## Запустить скрипты
 	${PYTHON} -m scripts
-
-catkin_build: _setup  ## Сбилдить пакет
-	catkin_make --source pkg -DCMAKE_BUILD_TYPE=Release --pkg=brain
 
 install-script-deps:  ## Установить зависимости для запуска скриптов локально
 	${PYTHON} -m pip install click inquirer colorama
