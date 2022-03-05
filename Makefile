@@ -3,7 +3,7 @@ PYTHON = $(PYTHONPATH) python3
 
 _SETUP = set -e ; source /opt/ros/noetic/setup.bash ; source setup.sh ; source scripts/_base.sh
 
-.PHONY: run-script install-script-deps help
+.PHONY: run-script help
 SHELL = bash
 
 BUILD_TYPE = Release
