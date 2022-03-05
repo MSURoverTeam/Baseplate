@@ -4,11 +4,12 @@
 
 ## Пошаговая настройка
 
-1. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers`
-2. `python3 -m pip install click inquirer colorama`
-3. `make catkin_build`
-4. `source setup.sh`
-5. Инициализация рабочего пространства
+1. Скопировать `.env.example` -> `.env`, и (*пока пропускаем эту часть*) заполнить `.env` реальными значениями
+2. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers`
+3. `python3 -m pip install click inquirer colorama`
+4. `make catkin_build`
+5. `source setup.sh`
+6. Инициализация рабочего пространства
     - `make run-script`
     - `dev` -> `init.sh`
 
