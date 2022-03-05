@@ -1,5 +1,7 @@
 # MSU Rover
 
+Репозиторий с конфигурацией нашего ровера в gazebo. Постепенно будет обрастать функционалом (манипулятор, навигация, и пр.) и различными утилитами.
+
 ## Пошаговая настройка
 
 1. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers`
