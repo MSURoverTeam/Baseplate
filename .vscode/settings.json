@@ -10,7 +10,9 @@
           "**/.git/subtree-cache/**": true,
           "**/node_modules/**": true,
           "**/tmp/**": true,
-          "**/dist/**": true
+          "**/dist/**": true,
+          "**/devel/**": true,
+          "**/build/**": true
     },
     "search.exclude": {
           "**/node_modules/**": true,
@@ -29,5 +31,11 @@
         "${workspaceFolder}/devel/lib/python3/dist-packages",
         "/opt/ros/noetic/lib/python3/dist-packages"
     ],
-    "ros.distro": "noetic"
+    "ros.distro": "noetic",
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash",
+        "args":  ["--init-file", ".vscode/terminal_init.sh"]
+      }
+    }
 }
