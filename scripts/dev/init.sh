@@ -21,3 +21,4 @@ ln -s ${ROVER_PROJECT_ROOT}/models/meshes /opt/rover/meshes
 mkdir -p ~/.gazebo/models
 
 ln -s ${ROVER_PROJECT_ROOT}/models/rover ~/.gazebo/models/rover
+ln -s ${ROVER_PROJECT_ROOT}/models/rover /opt/rover/rover
