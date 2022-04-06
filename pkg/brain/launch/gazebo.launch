@@ -1,4 +1,5 @@
 <launch>
+
   <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
@@ -16,13 +17,30 @@
 
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
 
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         respawn="false" output="screen"
         args="-z 1.0
               -unpause -urdf
               -model robot
               -param robot_description" />
+
+  <rosparam file="$(find brain)/config/rover_control.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/rover"
+        args="joint_state_controller
+              wheel_1_position_controller
+              wheel_6_position_controller
+              wheel_2_position_controller
+              wheel_4_position_controller
+              wheel_3_position_controller
+              wheel_5_position_controller
+              "/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    <remap from="/joint_states" to="/rover/joint_states" />
+  </node>
 
 </launch>

@@ -1,10 +1,46 @@
-rover:
-  joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
-
-  # Position Controllers ---------------------------------------
-  wheel_1_position_controller:
-    type: velocity_controllers/JointVelocityController
-    joint: wheel_1_joint
-    pid: {p: 100.0, i: 0.01, d: 10.0}
+"rover":
+  "joint_state_controller":
+    "publish_rate": 50
+    "type": "joint_state_controller/JointStateController"
+  "wheel_1_position_controller":
+    "joint": "wheel_1_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"
+  "wheel_2_position_controller":
+    "joint": "wheel_2_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"
+  "wheel_3_position_controller":
+    "joint": "wheel_3_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"
+  "wheel_4_position_controller":
+    "joint": "wheel_4_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"
+  "wheel_5_position_controller":
+    "joint": "wheel_5_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"
+  "wheel_6_position_controller":
+    "joint": "wheel_6_joint"
+    "pid":
+      "d": 10
+      "i": 0.01
+      "p": 100
+    "type": "velocity_controllers/JointVelocityController"

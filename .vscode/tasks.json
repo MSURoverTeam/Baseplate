@@ -23,6 +23,17 @@
           "clear": true
         }
       },
+      {
+        "label": "Build rover model",
+        "type": "shell",
+        "command": "build_model rover",
+        "group": "build",
+        "presentation": {
+          "reveal": "silent",
+          "panel": "shared",
+          "clear": true
+        }
+      }
     ],
 
     "inputs": [

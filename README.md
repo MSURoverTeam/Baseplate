@@ -17,7 +17,7 @@
 ## Пошаговая настройка
 
 1. Скопировать `.env.example` -> `.env`, и (*пока пропускаем эту часть*) заполнить `.env` реальными значениями
-2. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers`
+2. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers ros-noetic-ros-control jsonnet`
 3. `python3 -m pip install click inquirer colorama`
 4. `catkin_make --source pkg -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) --pkg=brain`
 5. `source setup.sh`

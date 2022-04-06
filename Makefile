@@ -14,6 +14,12 @@ catkin_build:  ## Сбилдить пакет
 	catkin_make --source pkg -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) --pkg=brain ;\
 	}
 
+full_build: catkin_build  ## Сбилдить проект (пакет, xarco, jsonnet)
+	{ \
+	$(_SETUP) ;\
+	build_model rover ;\
+	}
+
 run-script:  ## Запустить скрипты
 	${PYTHON} -m scripts
 
