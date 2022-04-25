@@ -9,6 +9,7 @@
           </joint>
           <actuator name="motor_${idx}">
             <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
           </actuator>
         </transmission>
   </xacro:macro>
