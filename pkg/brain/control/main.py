@@ -15,7 +15,9 @@ def run():
     rospy.init_node('brain')
     rospy.loginfo("Starting <brain> node")
 
-    setup_finalizers({})
+    setup_finalizers({
+        #"full_stop": cmd_vel_pub,
+    })
     #spinner = setup_listeners()  # After all else is done - spinner.join()
 
     program.do()

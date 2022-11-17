@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-source ${ROVER_SCRIPTS_ROOT}/_base.sh
+source ${ROVER_SCRIPTS_ROOT}/utils/_base.sh
 
 # SCRIPT CONTENT
 

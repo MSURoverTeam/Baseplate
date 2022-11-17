@@ -3,7 +3,7 @@ from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import Pose
 
 
-output = open('output.csv', 'wb', 0)
+output = open('var/output.csv', 'wb', 0)
 
 def callback(data: ModelStates):
     index = data.name.index("robot")

@@ -1,3 +1,4 @@
+
 import asyncio
 import importlib
 import inspect
@@ -13,7 +14,6 @@ import inquirer
 
 from .utils import title
 
-
 AnyDict = Dict[str, Any]
 
 BACK_CHOICE = "<Back>"
@@ -21,15 +21,23 @@ EXIT_CHOICE = "<Exit>"
 
 SCRIPTS_DIR = 'scripts'
 
+EXT_MAP = {
+    "py": "python3",
+    "mjs": "zx",
+    "sh": "bash",
+}
+
 
 def make_scripts_dict(base_dir: Path) -> AnyDict:
     scripts_dict = {}
     for dirname, _, files in os.walk(base_dir):
+        if dirname.endswith('/utils'):
+            continue
         scripts = list(
             filter(
                 lambda filename: (
                     not filename.startswith("__")
-                    and (filename.endswith(".py") or filename.endswith(".sh"))
+                    and any(map(lambda ext: filename.endswith(f".{ext}"), EXT_MAP.keys()))
                 ),
                 files,
             )
@@ -40,9 +48,7 @@ def make_scripts_dict(base_dir: Path) -> AnyDict:
 
 
 def choose_dir(scripts_dict: AnyDict, base_dir: Path) -> str:
-    choices = list(map(lambda directory: directory[len(str(base_dir)) + 1 :], scripts_dict.keys()))[
-        1:
-    ]
+    choices = list(map(lambda directory: directory[len(str(base_dir)) + 1 :], scripts_dict.keys()))
     choices.append(EXIT_CHOICE)
 
     prompt = "Type"
@@ -84,7 +90,7 @@ def run_script(path_to_script: Path) -> None:
 
     script = str(path_to_script.relative_to(Path(sys.argv[0]).parent))
     exec_script_path = SCRIPTS_DIR + '/' + script
-    executor = "python" if script.endswith("py") else "bash"
+
     base_package_path, script_module_path = script.split("/")
     script_module_path = script_module_path.replace(".py", "")
 
@@ -95,10 +101,18 @@ def run_script(path_to_script: Path) -> None:
         try:
             subprocess.call(exec_script_path)
         except PermissionError:
-            os.chmod(script, os.stat(script).st_mode | stat.S_IEXEC)
-            subprocess.call(exec_script_path)
+            os.chmod(exec_script_path, os.stat(exec_script_path).st_mode | stat.S_IEXEC)
+            subprocess.call(
+                exec_script_path,
+                env={"PYTHONPATH": f"{os.getenv('PYTHONPATH')}"},)
     else:
-        if executor == "python":
+        if '.' not in script:
+            raise ValueError(f"{script} does not have a file extension")
+        extension = script.split('.')[1]
+        if extension not in EXT_MAP:
+            raise ValueError(f"Unsupported extenstion {extension}")
+        executor = EXT_MAP[extension]
+        if executor == "python3":
             base_package = importlib.import_module(base_package_path)
             base_package.validate()  # type:ignore
 

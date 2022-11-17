@@ -3,6 +3,8 @@ export ROVER_DIR="${1:-/opt/rover}"
 export ROVER_SCRIPTS_ROOT=${ROVER_PROJECT_ROOT}/scripts
 export ROVER_CONFIG_ROOT=${ROVER_PROJECT_ROOT}/pkg/brain/config
 
+export PROJECT_ROOT=${ROVER_PROJECT_ROOT}
+
 echo "Root is - ${ROVER_PROJECT_ROOT}"
 
 pushd .
@@ -15,16 +17,18 @@ ln -sfn $(dirname ${ROS_ROOT})/catkin/cmake/toplevel.cmake ./pkg/CMakeLists.txt
 
 popd
 
-function build_model() {
+function build_model() {( set -e
+    cd $ROVER_PROJECT_ROOT
+
     model=${1:-rover}
     echo "Building model ${model}"
-    xacro ${ROVER_PROJECT_ROOT}/models/${model}/model.xarco > ${ROVER_PROJECT_ROOT}/models/${model}/model.urdf
+    xacro ${ROVER_PROJECT_ROOT}/models/${model}/model.xacro > ${ROVER_PROJECT_ROOT}/models/${model}/model.urdf
 
     if [[ "$model" == "rover" ]]; then
         echo "Running jsonnet for configs"
         jsonnet --jpath ${ROVER_CONFIG_ROOT} -S ${ROVER_CONFIG_ROOT}/rover_control.jsonnet -o ${ROVER_CONFIG_ROOT}/rover_control.yaml
     fi
-}
+)}
 
 function link_model() {
     ln -s ${ROVER_PROJECT_ROOT}/models/$1 ~/.gazebo/models/$1
@@ -51,15 +55,15 @@ function run_rviz() {
     launch_brain rviz.launch
 }
 
-function easy_sim() {
+function easy_sim() {( set -e
     build_model rover
     run_sim
-}
+)}
 
-function easy_run() {
+function easy_run() {( set -e
     make catkin_build
     rosrun brain control
-}
+)}
 
 function rover_stop() {
     rostopic pub /rover/cmd_vel geometry_msgs/Twist "linear:

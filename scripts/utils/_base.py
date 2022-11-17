@@ -3,6 +3,8 @@ from typing import Any
 
 from colorama import Fore, Style
 
+__all__ = ["title", "info", "any"]
+
 
 def title(string: Any) -> str:
     terminal_width = shutil.get_terminal_size((80, 20))[0]

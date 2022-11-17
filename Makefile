@@ -1,10 +1,16 @@
 PYTHONPATH = PYTHONPATH=./
 PYTHON = $(PYTHONPATH) python3
 
-_SETUP = set -e ; source /opt/ros/noetic/setup.bash ; source setup.sh ; source scripts/_base.sh
+_SETUP = set -e ; source /opt/ros/noetic/setup.bash ; source setup.sh ; source scripts/utils/_base.sh
 
 .PHONY: run-script help
 SHELL = bash
+
+full_build: catkin_build  ## Сбилдить проект (пакет, xacro, jsonnet)
+	{ \
+	$(_SETUP) ;\
+	build_model rover ;\
+	}
 
 BUILD_TYPE = Release
 catkin_build:  ## Сбилдить пакет
@@ -12,12 +18,6 @@ catkin_build:  ## Сбилдить пакет
 	$(_SETUP) ;\
 	warning "Build type - $(BUILD_TYPE)\n" ;\
 	catkin_make --source pkg -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) --pkg=brain ;\
-	}
-
-full_build: catkin_build  ## Сбилдить проект (пакет, xarco, jsonnet)
-	{ \
-	$(_SETUP) ;\
-	build_model rover ;\
 	}
 
 run-script:  ## Запустить скрипты

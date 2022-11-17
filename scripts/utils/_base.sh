@@ -67,8 +67,4 @@ information () {
 
 information "Sourced _base script\n"
 
-source .env
-
-sync_bot () {
-  sshpass -p "${ROBOT_PASSWORD}" rsync --progress --delete -avz -e ssh $1 "${ROBOT_HOST}:$2"
-}
+source ${PROJECT_ROOT}/.env
