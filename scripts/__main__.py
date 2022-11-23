@@ -104,7 +104,8 @@ def run_script(path_to_script: Path) -> None:
             os.chmod(exec_script_path, os.stat(exec_script_path).st_mode | stat.S_IEXEC)
             subprocess.call(
                 exec_script_path,
-                env={"PYTHONPATH": f"{os.getenv('PYTHONPATH')}"},)
+                env={"PYTHONPATH": f"{os.getenv('PYTHONPATH')}"},
+            )
     else:
         if '.' not in script:
             raise ValueError(f"{script} does not have a file extension")

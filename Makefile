@@ -1,5 +1,4 @@
-PYTHONPATH = PYTHONPATH=./
-PYTHON = $(PYTHONPATH) python3
+PYTHON = python3
 
 _SETUP = set -e ; source /opt/ros/noetic/setup.bash ; source setup.sh ; source scripts/utils/_base.sh
 

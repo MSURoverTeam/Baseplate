@@ -16,7 +16,7 @@
 
 ## Пошаговая настройка
 
-1. Скопировать `.env.example` -> `.env`, и (*пока пропускаем эту часть*) заполнить `.env` реальными значениями
+1. `cp .env.example .env`, и (*пока пропускаем эту часть*) заполнить `.env` реальными значениями
 2. `sudo apt install ros-noetic-velocity-controllers ros-noetic-gazebo-plugins ros-noetic-ros-controllers ros-noetic-ros-control jsonnet`
 3. `python3 -m pip install click inquirer colorama`
 4. `catkin_make --source pkg -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) --pkg=brain`
@@ -25,13 +25,13 @@
     - `make run-script`
     - `dev` -> `init.sh`
 
-Такой длинной является только первоначальная настройка. В дальнейшем, чтобы опять начать работать с симулляцией, надо будет выполнить только `source setup.sh`.
+Такой длинной является только первоначальная настройка. В дальнейшем, чтобы опять начать работать с симуляцией, надо будет выполнить только `source setup.sh`.
 
 В правильно настроенном рабочем пространстве доступны команды:
 
-- `run_sim` - запуск симулляции газебо с моделью ровера и топиками управления
+- `run_sim` - запуск симуляции gazebo с моделью ровера и топиками управления
 - `check_rover` - валидирует urdf-файл модели ровера
-- `link_model $ARG1` - добавляет модели из папки models в газебо, ARG1 - название папки
+- `link_model $ARG1` - добавляет модели из папки models в gazebo, ARG1 - название папки
 - `rover_stop` - отправляет все нули в /cmd_vel
 
 Кроме того, с помощью `make run-script` доступно меню выполнения утилит из папки [scripts](https://github.com/MSURoverTeam/Baseplate/tree/master/scripts). Там можно добавлять и свои python или sh скрипты - [пример для sh](https://github.com/MSURoverTeam/Baseplate/blob/master/scripts/dev/example.sh), аналогично для python (только без `source .../_base.sh`).
